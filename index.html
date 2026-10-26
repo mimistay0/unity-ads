@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSEngDz Ads System</title>
+    <!-- استدعاء مكتبة يونيتي الرسمية المحدثة للـ Web -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; background-color: transparent; overflow: hidden; }
+        #ad-container { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
+    </style>
+</head>
+<body>
+
+    <div id="ad-container"></div>
+
+    <script>
+        // إجبار المتصفح التقني على التصرف كتطبيق أندرويد أصلي لحماية الحساب
+        Object.defineProperty(navigator, 'userAgent', {
+            get: function () { return 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'; }
+        });
+
+        // بيانات حسابك الحقيقي في Unity Ads
+        const GAME_ID = "800412004"; 
+        const PLACEMENT_ID = "BP_Banner_Android"; 
+        const IS_TEST_MODE = false; // إعلانات حقيقية ومربحة فوراً
+
+        // بدء تشغيل الإعلانات
+        UnityAds.init({
+            gameId: GAME_ID,
+            testMode: IS_TEST_MODE,
+            onStart: () => {
+                UnityAds.show(PLACEMENT_ID, {
+                    container: document.getElementById('ad-container'),
+                    onComplete: () => console.log('Ad Rendered Successfully'),
+                    onError: (error) => console.error('Ad Playback Error:', error)
+                });
+            },
+            onError: (error) => console.error('Unity Init Error:', error)
+        });
+    </script>
+</body>
+</html>
