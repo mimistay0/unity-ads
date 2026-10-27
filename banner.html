@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Banner Ad</title>
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body { margin: 0; padding: 0; background-color: transparent; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        #ad-container { width: 100%; max-width: 320px; height: 50px; }
+    </style>
+</head>
+<body>
+
+    <div id="ad-container"></div>
+
+    <script>
+        const GAME_ID = "800412004";
+        const PLACEMENT_ID = "BP_Banner_Android";
+        const IS_TEST_MODE = false; 
+
+        function startUnityBanner() {
+            document.getElementById('ad-container').innerHTML = '';
+            UnityAds.init({
+                gameId: GAME_ID,
+                testMode: IS_TEST_MODE,
+                onStart: () => {
+                    UnityAds.show(PLACEMENT_ID, {
+                        container: document.getElementById('ad-container')
+                    });
+                }
+            });
+        }
+
+        startUnityBanner();
+
+        setInterval(function() {
+            startUnityBanner();
+        }, 30000);
+    </script>
+</body>
+</html>
