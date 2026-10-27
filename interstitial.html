@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Interstitial Ad</title>
+    
+    <!-- استدعاء مكتبة يونيتي ويب الرسمية والقانونية -->
+    <script src="https://jsdelivr.net"></script>
+    
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #000000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            overflow: hidden;
+        }
+        #unity-interstitial-container { 
+            width: 100vw; 
+            height: 100vh; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الحاوية التي سيظهر فيها إعلان الشاشة الكاملة -->
+    <div id="unity-interstitial-container"></div>
+
+    <script>
+        // معرفات حسابك الرسمية لإعلان الشاشة الكاملة
+        const GAME_ID = "800412004";
+        const PLACEMENT_ID = "BP_Interstitial_Android";
+        const IS_TEST_MODE = false; 
+
+        // دالة تشغيل الإعلان البيني فور فتح الشاشة
+        function showFullScreenAd() {
+            UnityAds.init({
+                gameId: GAME_ID,
+                testMode: IS_TEST_MODE,
+                onStart: () => {
+                    UnityAds.show(PLACEMENT_ID, {
+                        container: document.getElementById('unity-interstitial-container'),
+                        onComplete: () => console.log('Ad Finished/Closed'),
+                        onError: (error) => console.error('Playback Error:', error)
+                    });
+                },
+                onError: (error) => console.error('Init Error:', error)
+            });
+        }
+
+        // تشغيل الإعلان تلقائياً
+        showFullScreenAd();
+    </script>
+</body>
+</html>
